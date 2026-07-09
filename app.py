@@ -101,25 +101,20 @@ def load_data_from_url(url):
         st.error(f"Error fetching data: {e}")
         return None
 
+
 def generate_ai_summary(df):
-    # Configure Gemini API (Ensure GEMINI_API_KEY is set in Render Environment Variables)
-    api_key = st.secrets.get("GEMINI_API_KEY", None)
+    api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
-        return "• **AI Notice**: Please configure `GEMINI_API_KEY` in secrets or environment variables to generate automated executive insights."
-    
+        return "• **AI Notice**: Please configure `GEMINI_API_KEY` in Render's Environment Variables."
     try:
         genai.configure(api_key=api_key)
-        model = genai.GenerativeModel('gemini-pro')
-        
-        # Create a compact summary metadata prompt for the AI
+        model = genai.GenerativeModel('gemini-2.0-flash')  # 'gemini-pro' is retired, will also fail
         data_profile = f"Columns: {list(df.columns)}\nShape: {df.shape}\nData Description:\n{df.describe(include='all').to_string()}"
         prompt = f"Provide a professional, executive summary of this dataset in bullet points. Highlight trends, anomalies, and key KPIs:\n\n{data_profile}"
-        
         response = model.generate_content(prompt)
         return response.text
     except Exception as e:
         return f"• **AI Error**: Unable to generate summary at this moment. ({str(e)})"
-
 # --- 3. UI RENDERING SYSTEM ---
 
 # LOGOUT BUTTON ROUTINE
@@ -289,6 +284,4 @@ else:
             else:
                 st.error("The selected working data model fields do not contain numeric structured elements to chart reports.")
                 
-            # Setup periodic background trigger for continuous real-time execution polling
-            st.empty()
-            st.fragment(st.rerun)()
+
