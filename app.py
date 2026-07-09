@@ -132,7 +132,7 @@ if st.session_state.logged_in:
 
 # AUTHENTICATION SCREEN
 if not st.session_state.logged_in:
-    st.title("📊 Enterprise AI Analytics Portal")
+    st.title("Enterprise AI Analytics Portal")
     
     if st.session_state.auth_page == 'login':
         st.subheader("Login to Your Account")
@@ -152,9 +152,9 @@ if not st.session_state.logged_in:
         st.markdown("---")
         st.markdown("🌐 **OAuth Fast-Login Options:**")
         col_g, col_a, col_gh = st.columns(3)
-        with col_g: st.button("🔑 Continue with Google")
-        with col_a: st.button("🍏 Continue with Apple")
-        with col_gh: st.button("🐙 Continue with GitHub")
+        with col_g: st.button("Continue with Google")
+        with col_a: st.button("Continue with Apple")
+        with col_gh: st.button("Continue with GitHub")
         
         st.markdown("---")
         if st.button("Don't have an account? Sign Up"):
@@ -200,7 +200,7 @@ if not st.session_state.logged_in:
 
 # CORE APPLICATION SCREEN
 else:
-    st.title("🎯 Live Data Engine & AI Analytics Dashboard")
+    st.title("Live Data Engine & AI Analytics Dashboard")
     
     # Live data sync auto-refresh interval configuration
     st.sidebar.header("🔄 Live Synchronization Sync")
@@ -247,15 +247,15 @@ else:
                         st.error(f"Aggregation failure: {ex}")
 
             # --- 5. RENDER SYSTEM AND DATA SHOWCASE ---
-            st.markdown("### 📋 Active Synchronized Datatable Window")
+            st.markdown("### Active Synchronized Datatable Window")
             st.dataframe(working_df, use_container_width=True)
             
             # Layout Setup for AI Summaries and Graphical Displays
-            st.markdown("### 🧠 AI Automated Business Summary Insights")
+            st.markdown("### AI Automated Business Summary Insights")
             ai_summary_box = generate_ai_summary(working_df)
             st.info(ai_summary_box)
             
-            st.markdown("### 📈 Interactive Business Reporting Visualizations")
+            st.markdown("### Interactive Business Reporting Visualizations")
             numeric_cols = working_df.select_dtypes(include=['number']).columns.tolist()
             categorical_cols = working_df.select_dtypes(include=['object']).columns.tolist()
             
