@@ -82,6 +82,7 @@ def validate_password(password):
         return False
     return True
 
+@st.cache_data(ttl=60)
 def load_data_from_url(url):
     try:
         # Handle GitHub raw link conversion automatically
