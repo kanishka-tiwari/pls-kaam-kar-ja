@@ -6,6 +6,7 @@ import google.generativeai as genai
 import re
 import requests
 from io import BytesIO
+import os
 
 # --- 1. CONFIGURATION & STYLING (BLUE THEME) ---
 st.set_page_config(page_title="AI Live Reporter", layout="wide", initial_sidebar_state="expanded")
